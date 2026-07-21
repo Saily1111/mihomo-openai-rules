@@ -1,0 +1,20 @@
+payload:
+  # ChatGPT
+  - DOMAIN-SUFFIX,chatgpt.com
+
+  # OpenAI
+  - DOMAIN-SUFFIX,openai.com
+  - DOMAIN-SUFFIX,oaistatic.com
+  - DOMAIN-SUFFIX,oaiusercontent.com
+  - DOMAIN-SUFFIX,oaistatsig.com
+  - DOMAIN-SUFFIX,openaimerge.com
+
+  # Arkose
+  - DOMAIN,openai-api.arkoselabs.com
+
+  # 动态 Azure
+  - DOMAIN-KEYWORD,openaicom
+  - DOMAIN-KEYWORD,openaiapi
+
+  # 已知 CDN
+  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net
