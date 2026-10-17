@@ -1,20 +1,59 @@
+# OpenAI / ChatGPT / Codex 分流规则
+# 适用于 Mihomo / Clash 的 classical 类型 YAML 规则集。
+# rule-providers 中使用 behavior: classical、format: yaml。
+# 保留原有规则；建议补充项已启用，可选项取消对应行注释后启用。
+# 官方网络清单：
+# https://help.openai.com/en/articles/9247338-network-recommendations-for-chatgpt-errors-on-web-and-apps
+
 payload:
-  # ChatGPT
+  # ChatGPT（同时覆盖 ws.chatgpt.com 等子域名）
   - DOMAIN-SUFFIX,chatgpt.com
 
-  # OpenAI
+  # OpenAI、API、登录、静态资源及文件服务
   - DOMAIN-SUFFIX,openai.com
   - DOMAIN-SUFFIX,oaistatic.com
   - DOMAIN-SUFFIX,oaiusercontent.com
   - DOMAIN-SUFFIX,oaistatsig.com
   - DOMAIN-SUFFIX,openaimerge.com
 
-  # Arkose
+  # Arkose：保留原有规则
   - DOMAIN,openai-api.arkoselabs.com
 
-  # 动态 Azure
+  # Azure 相关兼容规则：保留原有配置，关键字匹配范围较宽
   - DOMAIN-KEYWORD,openaicom
   - DOMAIN-KEYWORD,openaiapi
 
-  # 已知 CDN
+  # 已知 CDN：已被上面的 openaiapi 关键字覆盖，保留原有条目
   - DOMAIN-SUFFIX,openaiapi-site.azureedge.net
+
+  # Cloudflare 验证：建议补充，已启用
+  - DOMAIN,challenges.cloudflare.com
+
+  # WorkOS 相关依赖：建议补充，已启用
+  - DOMAIN,cdn.workos.com
+  - DOMAIN,forwarder.workos.com
+  - DOMAIN,frontend-apps-multi-region.workos.com
+  - DOMAIN,setup.workos.com
+  - DOMAIN,images.workoscdn.com
+  - DOMAIN,workos.imgix.net
+
+  # 以下为可选项，默认不启用。
+  # 第三方域名可能被其他网站共用，按实际功能及连接日志启用。
+
+  # 支付页面
+  # - DOMAIN,js.stripe.com
+
+  # 客服组件
+  # - DOMAIN-SUFFIX,intercom.io
+  # - DOMAIN-SUFFIX,intercomcdn.com
+
+  # 邮件链接
+  # - DOMAIN-SUFFIX,ct.sendgrid.net
+
+  # 错误与性能监测
+  # - DOMAIN,o207216.ingest.sentry.io
+  # - DOMAIN,o33249.ingest.sentry.io
+  # - DOMAIN,rum.browser-intake-datadoghq.com
+
+  # Apple 相关依赖
+  # - DOMAIN,humb.apple.com
