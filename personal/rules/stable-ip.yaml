@@ -1,0 +1,6 @@
+# 由 scripts/generate-rules.py 自动生成，请勿手工修改。
+# 唯一维护源：personal-rules.yaml 的 stable-ip 分组。
+payload:
+  - "DOMAIN,aistudio.google.com"
+  - "DOMAIN,ai.google.dev"
+  - "DOMAIN-SUFFIX,grok.com"

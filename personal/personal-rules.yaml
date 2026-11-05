@@ -1,0 +1,7 @@
+# 唯一手工维护的规则源；提交 main 后自动生成 rules/stable-ip.yaml。
+# 策略和链式节点由本机脚本管理，此处只保存服务域名。
+stable-ip:
+  # 优先复用机场 OpenAI 规则，仅补充当前未覆盖的三个入口
+  - DOMAIN,aistudio.google.com
+  - DOMAIN,ai.google.dev
+  - DOMAIN-SUFFIX,grok.com
