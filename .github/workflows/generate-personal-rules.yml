@@ -47,7 +47,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git add -- personal/rules/stable-ip.yaml personal/rules/vps-socks.yaml
+          git add -- personal/rules/stable-ip.yaml personal/rules/vps-https.yaml
           if git diff --cached --quiet; then
             echo "Generated file is already up to date."
             exit 0
