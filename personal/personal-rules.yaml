@@ -7,5 +7,5 @@ stable-ip:
   - DOMAIN-SUFFIX,grok.com
 
 # 指定 SOCKS 目的：固定走美国高级 IEPL 专线 3，仅匹配此主机与端口
-vps-socks:
-  - AND,((IP-CIDR,209.240.165.181/32),(DST-PORT,42356))
+vps-https:
+  - AND,((IP-CIDR,209.240.165.181/32),(DST-PORT,8443))
