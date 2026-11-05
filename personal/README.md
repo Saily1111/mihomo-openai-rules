@@ -6,6 +6,8 @@ AI 服务优先复用机场自带的完整 OpenAI 规则组。此仓库仅补充
 
 本机 Personal 脚本使用 `behavior: classical`、`format: yaml` 加载输出，将规则接到德州链式落地策略并放在机场规则之前。节点和连接参数由本机配置管理，本仓库只存规则和生成工具。
 
+另有独立的 `vps-socks` 分组，精确匹配 `209.240.165.181:42356`，固定走美国高级 IEPL 专线 3，不跟随 Proxies 的手动选择。该分组只允许 `AND,((IP-CIDR,209.240.165.181/32),(DST-PORT,42356))`，停用时保留 `vps-socks: []`。公开文件仅含目的地址和端口，不含 SOCKS5 账号密码，也没有企业或 SSH 规则。此例外仅在规则模式生效，全局模式仍统一走德州。
+
 新增地址写成 `DOMAIN,精确域名` 或 `DOMAIN-SUFFIX,域名后缀`，不填写策略名称。停用时保留 `stable-ip: []`。重复分组、重复规则和不支持的规则格式会终止生成，不替换现有结果。
 
 ```sh
@@ -14,4 +16,4 @@ python scripts/generate-rules.py
 python scripts/generate-rules.py --check
 ```
 
-工作流只提交 `rules/stable-ip.yaml`，使用 GitHub 自动提供的 `GITHUB_TOKEN`。普通推送遇到并发修改会失败，不会强制覆盖 `main`。首次上传后可在 Actions 手动运行 **Generate personal rules**，并在 Clash 规则集页面刷新一次；更新机场订阅不保证立即重新下载规则集。
+工作流只提交 `personal/rules/stable-ip.yaml` 和 `personal/rules/vps-socks.yaml`，使用 GitHub 自动提供的 `GITHUB_TOKEN`。普通推送遇到并发修改会失败，不会强制覆盖 `main`。首次上传后可在 Actions 手动运行 **Generate personal rules**，并在 Clash 规则集页面刷新一次；更新机场订阅不保证立即重新下载规则集。
