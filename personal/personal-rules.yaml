@@ -6,6 +6,6 @@ stable-ip:
   - DOMAIN,ai.google.dev
   - DOMAIN-SUFFIX,grok.com
 
-# 指定 SOCKS 目的：固定走美国高级 IEPL 专线 3，仅匹配此主机与端口
+# 匹配 VPS 的 HTTPS 代理端口，前置节点由本机脚本决定
 vps-https:
   - AND,((IP-CIDR,209.240.165.181/32),(DST-PORT,8443))
