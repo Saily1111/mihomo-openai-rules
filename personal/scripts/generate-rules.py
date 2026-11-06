@@ -12,8 +12,7 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
-GROUPS = ("stable-ip", "vps-https")
-VPS_HTTPS_RULE = "AND,((IP-CIDR,209.240.165.181/32),(DST-PORT,8443))"
+GROUPS = ("stable-ip",)
 
 
 class UniqueKeyLoader(yaml.SafeLoader):
@@ -33,7 +32,7 @@ def load_source(source):
     with source.open(encoding="utf-8-sig") as stream:
         data = yaml.load(stream, Loader=UniqueKeyLoader)
     if not isinstance(data, dict) or set(data) != set(GROUPS):
-        raise ValueError("总 YAML 必须包含 stable-ip、vps-https 分组；清空时保留 分组名: []")
+        raise ValueError("总 YAML 必须且只能包含 stable-ip 分组；清空时保留 stable-ip: []")
     seen = set()
     for group in GROUPS:
         rules = data[group]
@@ -43,14 +42,10 @@ def load_source(source):
             location = f"{group} 第 {index} 条"
             if not isinstance(rule, str):
                 raise ValueError(f"{location}：规则必须是字符串")
-            if group == "vps-https":
-                if rule != VPS_HTTPS_RULE:
-                    raise ValueError(f"{location}：vps-https 只允许指定目的主机和端口的 AND 组合规则")
-            else:
-                parts = rule.split(",")
-                if (len(parts) != 2 or parts[0] not in {"DOMAIN", "DOMAIN-SUFFIX"}
-                        or not parts[1] or any(character.isspace() for character in rule)):
-                    raise ValueError(f"{location}：使用 DOMAIN,域名 或 DOMAIN-SUFFIX,域名，不填写出口")
+            parts = rule.split(",")
+            if (len(parts) != 2 or parts[0] not in {"DOMAIN", "DOMAIN-SUFFIX"}
+                    or not parts[1] or any(character.isspace() for character in rule)):
+                raise ValueError(f"{location}：使用 DOMAIN,域名 或 DOMAIN-SUFFIX,域名，不填写出口")
             if rule in seen:
                 raise ValueError(f"{location}：重复规则 {rule}")
             seen.add(rule)

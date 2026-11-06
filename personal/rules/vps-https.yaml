@@ -1,4 +1,0 @@
-# 由 scripts/generate-rules.py 自动生成，请勿手工修改。
-# 唯一维护源：personal-rules.yaml 的 vps-https 分组。
-payload:
-  - "AND,((IP-CIDR,209.240.165.181/32),(DST-PORT,8443))"
